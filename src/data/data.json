@@ -1,0 +1,98 @@
+{
+    "products": [
+        {
+          "id": "1",
+          "image": "https://example.com/product1.jpg",
+          "title": "Smartphone X",
+          "price": 699,
+          "islike": false
+        },
+        {
+          "id": "2",
+          "image": "https://example.com/product2.jpg",
+          "title": "Laptop Pro 15",
+          "price": 1299,
+          "islike": false
+
+        },
+        {
+          "id": "3",
+          "image": "https://example.com/product3.jpg",
+          "title": "Wireless Earbuds",
+          "price": 199,
+          "islike": false
+        },
+        {
+          "id": "4",
+          "image": "https://example.com/product4.jpg",
+          "title": "Gaming Mouse",
+          "price": 89,
+          "islike": false
+        },
+        {
+          "id": "5",
+          "image": "https://example.com/product5.jpg",
+          "title": "Mechanical Keyboard",
+          "price": 159,
+          "islike": false
+
+        },
+        {
+          "id": "6",
+          "image": "https://example.com/product6.jpg",
+          "title": "Smart Watch",
+          "price": 249,
+          "islike": false
+
+        },
+        {
+          "id": "7",
+          "image": "https://example.com/product7.jpg",
+          "title": "Portable Speaker",
+          "price": 119,
+          "islike": false
+
+        },
+        {
+          "id": "8",
+          "image": "https://example.com/product8.jpg",
+          "title": "Tablet 10.5 inch",
+          "price": 499,
+          "islike": false
+
+        },
+        {
+          "id": "9",
+          "image": "https://example.com/product9.jpg",
+          "title": "4K Monitor",
+          "price": 799,
+          "islike": false
+
+        },
+        {
+          "id": "10",
+          "image": "https://example.com/product10.jpg",
+          "title": "External Hard Drive",
+          "price": 149,
+          "islike": false
+
+        },
+        {
+          "id": "11",
+          "image": "https://example.com/product11.jpg",
+          "title": "VR Headset",
+          "price": 399,
+          "islike": false
+
+        },
+        {
+          "id": "12",
+          "image": "https://example.com/product12.jpg",
+          "title": "Drone Camera",
+          "price": 899,
+          "islike": false
+
+        }
+      ]
+      
+}
