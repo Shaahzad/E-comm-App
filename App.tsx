@@ -29,7 +29,6 @@ const MyHomeStack = () => {
     screenOptions={{
       headerShown: false
     }}
-    initialRouteName='Product_Details'
     >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Product_Details" component={ProductDetailScreen} />
