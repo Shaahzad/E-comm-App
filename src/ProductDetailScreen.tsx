@@ -1,9 +1,10 @@
 import { Image, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import Header from './components/Header'
-import { useRoute, RouteProp } from '@react-navigation/native'
-import { RootStackParamList } from '../App'
+import { useRoute, RouteProp, useNavigation, NavigationProp } from '@react-navigation/native'
+import { RootStackParamList, RootTabParamList } from '../App'
+import { addTocartDetail, cartContext } from './context/CartContext'
 
 
 const imgUrl = 'https://res.cloudinary.com/dlc5c1ycl/image/upload/v1710567613/vulb5bckiruhpzt2v8ec.png'
@@ -16,13 +17,29 @@ const colorsArray = [
     "#1D752B",
     "#000000"
 ]
+
 type ProductDetailRouteProp = RouteProp<RootStackParamList, 'Product_Details'>;
 
 const ProductDetailScreen = () => {
+    const navigation = useNavigation<NavigationProp<RootTabParamList>>()
+    const context = useContext(cartContext)
+    if (!context) {
+        return null;
+    }
+    const { addToCart } = context
     const [selectedsize, setSelectedsize] = useState<string | null>(null)
     const [selectedColor, setSelectedColor] = useState<string | null>(null)
     const route = useRoute<ProductDetailRouteProp>()
     const item = route.params.item
+    const HandleAddToCart = (item: addTocartDetail) => {
+    const cartItem : addTocartDetail = {
+        ...item,
+        size: selectedsize,
+        color: selectedColor
+    }
+    addToCart(cartItem)
+    navigation.navigate("Cart")
+    }
     return (
         <LinearGradient colors={['#FDF0F3', '#FFFBFC']}
             style={styles.container}
@@ -41,8 +58,10 @@ const ProductDetailScreen = () => {
             <Text style={[styles.title, styles.size]}>Size</Text>
             <View style={styles.sizecontainer}>
                 {
-                    sizes.map((size) => (
-                        <TouchableOpacity onPress={() => {
+                    sizes.map((size, index) => (
+                        <TouchableOpacity
+                        key={index} 
+                         onPress={() => {
                             setSelectedsize(size)
                         }} style={styles.sizevaluecontainer}>
                             <Text style={[styles.sizevalue,
@@ -57,8 +76,10 @@ const ProductDetailScreen = () => {
             <Text style={[styles.title, styles.color]}>Colors</Text>
             <View style={styles.colorcontainer}>
                 {
-                    colorsArray.map((color) => (
-                        <TouchableOpacity onPress={() => setSelectedColor(color)}
+                    colorsArray.map((color, index) => (
+                        <TouchableOpacity 
+                        key={index}
+                        onPress={() => setSelectedColor(color)}
                             style={[styles.circleBorder, selectedColor == color &&
                             {
                                 borderColor: color, borderWidth: 2,
@@ -70,7 +91,9 @@ const ProductDetailScreen = () => {
                 }
             </View>
             {/* button container */}
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={()=> 
+            HandleAddToCart(item)
+            }>
                 <Text style={styles.buttonText}>Add to Cart</Text>
             </TouchableOpacity>
         </LinearGradient>

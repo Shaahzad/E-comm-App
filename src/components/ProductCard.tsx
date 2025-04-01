@@ -9,7 +9,9 @@ export type ProductDetails = {
     image: string,
     title: string,
     price: number,
-    islike: boolean
+    islike: boolean,
+    size: string | null;
+    color: string | null;  
 }
 type ProductCardProps = {
     item: ProductDetails,

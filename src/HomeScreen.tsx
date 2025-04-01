@@ -6,6 +6,8 @@ import Fontisto from 'react-native-vector-icons/Fontisto'
 import Category from './components/Category'
 import ProductCard, { ProductDetails } from './components/ProductCard'
 import data from "./data/data.json"
+
+
 const category = ['Trending Now', 'All', 'New']
 const HomeScreen = (): React.JSX.Element => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -30,11 +32,6 @@ const HomeScreen = (): React.JSX.Element => {
         >
             <Header isCart={true}/>
 
-            {/* product */}
-            {/* <View style={styles.card}>
-                <ProductCard item={data.products[0]} islike={islike} setIsLike={setIsLike}/>
-                <ProductCard item={data.products[1]}  islike={islike} setIsLike={setIsLike}/>
-            </View> */}
             <FlatList
                 ListHeaderComponent={
                     <>
@@ -68,6 +65,7 @@ const HomeScreen = (): React.JSX.Element => {
                 Handleliked={Handleliked}
                 />}
                 showsVerticalScrollIndicator={false}
+                keyExtractor={(item)=> item.id}
                 contentContainerStyle={{
                     paddingBottom: 50
                 }}

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeScreen from './src/HomeScreen'
@@ -11,8 +11,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import ProductDetailScreen from './src/ProductDetailScreen'
 import { ProductDetails } from './src/components/ProductCard'
 import CartScreen from './src/CartScreen'
+import { CartProvider, cartContext } from './src/context/CartContext'
 
-type RootTabParamList = {
+export type RootTabParamList = {
   Home_Stack: undefined,
   Cart: undefined,
   Orders: undefined,
@@ -20,16 +21,16 @@ type RootTabParamList = {
 }
 export type RootStackParamList = {
   Home: undefined,
-  Product_Details: {item: ProductDetails}
+  Product_Details: { item: ProductDetails }
 }
 const Tab = createBottomTabNavigator<RootTabParamList>()
 const Stack = createNativeStackNavigator<RootStackParamList>()
 const MyHomeStack = () => {
   return (
     <Stack.Navigator
-    screenOptions={{
-      headerShown: false
-    }}
+      screenOptions={{
+        headerShown: false
+      }}
     >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Product_Details" component={ProductDetailScreen} />
@@ -38,37 +39,74 @@ const MyHomeStack = () => {
 }
 const App = (): React.JSX.Element => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={{
-        headerShown: false,
-        tabBarShowLabel: false,
-        tabBarActiveTintColor: '#E96E6E'
-      }}
-      initialRouteName='Cart'
-      >
-        <Tab.Screen name="Home_Stack" component={MyHomeStack} options={{
-          tabBarIcon: ({ focused, color, size }) => {
-            return <Entypo name="home" size={size} color={color} />
-          }
-        }} />
-        <Tab.Screen name="Orders" component={HomeScreen} options={{
-          tabBarIcon: ({ focused, color, size }) => {
-            return <MaterialIcons name="reorder" size={size} color={color} />
-          }
-        }} />
-        <Tab.Screen name="Cart" component={CartScreen} options={{
-          tabBarIcon: ({ focused, color, size }) => {
-            return <MaterialCommunityIcons name="cart" size={size} color={color} />
-          }
-        }} />
-        <Tab.Screen name="Profile" component={HomeScreen} options={{
-          tabBarIcon: ({ focused, color, size }) => {
-            return <FontAwesome6 name="user" size={size} color={color} />
-          }
-        }} />
+    <CartProvider>
+      <NavigationContainer>
+        <Tab.Navigator screenOptions={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarActiveTintColor: '#E96E6E'
+        }}
+          // initialRouteName=''
+        >
+          <Tab.Screen name="Home_Stack" component={MyHomeStack} options={{
+            tabBarIcon: ({ focused, color, size }) => {
+              return <Entypo name="home" size={size} color={color} />
+            }
+          }} />
+          <Tab.Screen name="Orders" component={HomeScreen} options={{
+            tabBarIcon: ({ focused, color, size }) => {
+              return <MaterialIcons name="reorder" size={size} color={color} />
+            }
+          }} />
+          <Tab.Screen name="Cart" component={CartScreen} options={{
+            tabBarIcon: ({ focused, color, size }) => {
+              const context = useContext(cartContext)
+              if(!context){
+                return <MaterialCommunityIcons name="cart" size={size} color={color} />;
+              }
+              const { Carts } = context;
+              return (
+                <View style={{
+                  position: 'relative'
+                }}>
+                  <MaterialCommunityIcons
+                    name="cart"
+                    size={size}
+                    color={color} />
+                <View
+                style={{
+                  height: 14,
+                  width: 14,
+                  borderRadius: 7,
+                  backgroundColor: color,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  position: 'absolute',
+                  top: -10,
+                  right: -5
+                }}
+                >
+                  <Text style={{
+                    fontSize: 10,
+                    color: "white",
+                    fontWeight: '500'
+                  }}>
+                  {Carts?.length}
+                  </Text>
+                </View>
+                </View>
+              )
+            }
+          }} />
+          <Tab.Screen name="Profile" component={HomeScreen} options={{
+            tabBarIcon: ({ focused, color, size }) => {
+              return <FontAwesome6 name="user" size={size} color={color} />
+            }
+          }} />
 
-      </Tab.Navigator>
-    </NavigationContainer>
+        </Tab.Navigator>
+      </NavigationContainer>
+    </CartProvider>
   )
 }
 
