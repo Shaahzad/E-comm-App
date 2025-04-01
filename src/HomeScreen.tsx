@@ -28,7 +28,7 @@ const HomeScreen = (): React.JSX.Element => {
         <LinearGradient colors={['#FDF0F3', '#FFFBFC']}
             style={styles.container}
         >
-            <Header />
+            <Header isCart={true}/>
 
             {/* product */}
             {/* <View style={styles.card}>

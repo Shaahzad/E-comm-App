@@ -28,7 +28,7 @@ const ProductDetailScreen = () => {
             style={styles.container}
         >
             <View style={styles.headerContainer}>
-                <Header />
+                <Header isCart={false}/>
             </View>
             <Image source={{ uri: item.image }} style={styles.coverImage} />
             <View style={styles.contentContainer}>

@@ -10,6 +10,7 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import ProductDetailScreen from './src/ProductDetailScreen'
 import { ProductDetails } from './src/components/ProductCard'
+import CartScreen from './src/CartScreen'
 
 type RootTabParamList = {
   Home_Stack: undefined,
@@ -42,23 +43,25 @@ const App = (): React.JSX.Element => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarActiveTintColor: '#E96E6E'
-      }}>
+      }}
+      initialRouteName='Cart'
+      >
         <Tab.Screen name="Home_Stack" component={MyHomeStack} options={{
           tabBarIcon: ({ focused, color, size }) => {
             return <Entypo name="home" size={size} color={color} />
           }
         }} />
-        <Tab.Screen name="Home_Stack" component={HomeScreen} options={{
+        <Tab.Screen name="Orders" component={HomeScreen} options={{
           tabBarIcon: ({ focused, color, size }) => {
             return <MaterialIcons name="reorder" size={size} color={color} />
           }
         }} />
-        <Tab.Screen name="Home_Stack" component={HomeScreen} options={{
+        <Tab.Screen name="Cart" component={CartScreen} options={{
           tabBarIcon: ({ focused, color, size }) => {
             return <MaterialCommunityIcons name="cart" size={size} color={color} />
           }
         }} />
-        <Tab.Screen name="Home_Stack" component={HomeScreen} options={{
+        <Tab.Screen name="Profile" component={HomeScreen} options={{
           tabBarIcon: ({ focused, color, size }) => {
             return <FontAwesome6 name="user" size={size} color={color} />
           }
