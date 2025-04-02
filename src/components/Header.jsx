@@ -10,7 +10,7 @@ const Header = ({isCart}) => {
           {
             isCart ? <IonIcons name='chevron-back' size={28} color={'#E96E6E'}/> 
             :
-            <Image source={require("../assets/appIcon.png")} style={styles.appIcon}/>
+            <Image source={require("../assets/AppIcon.png")} style={styles.appIcon}/>
           }
         </TouchableOpacity>
         {
