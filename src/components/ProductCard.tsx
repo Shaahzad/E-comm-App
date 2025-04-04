@@ -22,7 +22,7 @@ type ProductCardProps = {
 const ProductCard: React.FC<ProductCardProps> =({Handleliked, item}) => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>()
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Product_Details', {item})} style={styles.container}>Handleliked
+    <TouchableOpacity onPress={() => navigation.navigate('Product_Details', {item})} style={styles.container}>
       <Image source={{uri: item.image}} style={styles.coverImage}/>
       <View style={styles.content}>
       <Text style={styles.title}>{item.title}</Text>
