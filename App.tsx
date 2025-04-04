@@ -40,7 +40,7 @@ const CartTabIcon = ({ color, size }: any) => {
         }}
       >
         <Text style={{ fontSize: 10, color: 'white', fontWeight: '500' }}>
-          {Carts?.length}
+          {Carts?.length ?? 0}
         </Text>
       </View>
     </View>

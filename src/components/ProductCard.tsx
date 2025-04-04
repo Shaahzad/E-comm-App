@@ -7,7 +7,7 @@ import { RootStackParamList } from '../../App'
 export type ProductDetails = {
     id: string,
     image: string,
-    title?: string,
+    title: string,
     price: number,
     islike: boolean,
     size: string | null;
