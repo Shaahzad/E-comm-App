@@ -32,14 +32,19 @@ const ProductDetailScreen = () => {
     const route = useRoute<ProductDetailRouteProp>()
     const item = route.params.item
     const HandleAddToCart = (item: addTocartDetail) => {
-    const cartItem : addTocartDetail = {
-        ...item,
-        size: selectedsize,
-        color: selectedColor
-    }
-    addToCart(cartItem)
-    navigation.navigate("Cart")
-    }
+        try {
+            const cartItem: addTocartDetail = {
+                ...item,
+                size: selectedsize || null,
+                color: selectedColor || null
+            }
+    
+            addToCart(cartItem);    
+            navigation.navigate('Cart')
+        } catch (error) {
+            console.error("Error adding to cart:", error);
+        }    }
+
     return (
         <LinearGradient colors={['#FDF0F3', '#FFFBFC']}
             style={styles.container}
@@ -73,6 +78,7 @@ const ProductDetailScreen = () => {
                     ))
                 }
             </View>
+
             <Text style={[styles.title, styles.color]}>Colors</Text>
             <View style={styles.colorcontainer}>
                 {
@@ -90,6 +96,7 @@ const ProductDetailScreen = () => {
                     )
                 }
             </View>
+
             {/* button container */}
             <TouchableOpacity style={styles.button} onPress={()=> 
             HandleAddToCart(item)
@@ -98,6 +105,7 @@ const ProductDetailScreen = () => {
             </TouchableOpacity>
         </LinearGradient>
     )
+    
 }
 
 export default ProductDetailScreen
@@ -107,17 +115,17 @@ const styles = StyleSheet.create({
         flex: 1
     },
     headerContainer: {
-        padding: 20,
+        padding: 12,
     },
     coverImage: {
         width: '100%',
-        height: 420,
+        height: 330,
     },
     contentContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginHorizontal: 20,
-        marginVertical: 20
+        marginVertical: 10
     },
     title: {
         fontSize: 20,
@@ -153,7 +161,7 @@ const styles = StyleSheet.create({
     },
     colorcontainer: {
         flexDirection: 'row',
-        marginHorizontal: 20,
+        marginHorizontal: 10,
     },
     circleBorder: {
         height: 48,

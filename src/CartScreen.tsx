@@ -22,7 +22,8 @@ return (
       <CartCard /> */}
       <FlatList
       data={Carts}
-      renderItem={CartCard}
+      renderItem={({ item }) => <CartCard item={item} />} 
+      keyExtractor={(item) => item.id} 
       ListFooterComponent={
         <>
               <View style={styles.priceContainer}>

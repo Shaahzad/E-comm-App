@@ -19,7 +19,7 @@ const HomeScreen = (): React.JSX.Element => {
             if(product.id === item.id){
                 return{
                     ...product,
-                    islike: true
+                    islike: !product.islike
                 }
             }
             return product
@@ -62,7 +62,7 @@ const HomeScreen = (): React.JSX.Element => {
                 numColumns={2}
                 data={products}
                 renderItem={({item, index}) => <ProductCard item={item} islike={islike} 
-                Handleliked={Handleliked}
+                Handleliked={Handleliked} 
                 />}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={(item)=> item.id}

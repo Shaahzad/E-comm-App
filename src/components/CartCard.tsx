@@ -3,7 +3,7 @@ import React, {  useContext } from 'react'
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6"
 import { addTocartDetail, cartContext } from '../context/CartContext'
 
-// const imgUrl = 'https://res.cloudinary.com/dlc5c1ycl/image/upload/v1710567613/vulb5bckiruhpzt2v8ec.png'
+const imgUrl = 'https://res.cloudinary.com/dlc5c1ycl/image/upload/v1710567613/vulb5bckiruhpzt2v8ec.png'
 const CartCard = ({ item }: {item: addTocartDetail}) => {
   const context = useContext(cartContext)
   if(!context) return null
@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
   coverImg: {
     height: 125,
     width: '25%',
-    borderRadius: 10
+    borderRadius: 10,
+    // objectFit: 'cover'
   },
   cardContent: {
     flex: 1,

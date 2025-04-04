@@ -7,7 +7,7 @@ import { RootStackParamList } from '../../App'
 export type ProductDetails = {
     id: string,
     image: string,
-    title: string,
+    title?: string,
     price: number,
     islike: boolean,
     size: string | null;
@@ -45,14 +45,15 @@ export default ProductCard
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        marginTop: 20
+        marginTop: 20,
+        position: 'relative',
     },
     coverImage:{
-        height: 256,
-        width: 167,
-        position: 'relative',
+        height: 200,
+        width: 150,
         borderRadius: 20,
         marginVertical: 10,
+        objectFit: "contain",
     },
     title:{
         fontSize: 18,
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 17,
         position: 'absolute',
-        top: 20,
-        right: 20,
+        top: -180,
+        left: 110
     }
 })

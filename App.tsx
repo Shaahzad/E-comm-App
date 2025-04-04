@@ -13,6 +13,40 @@ import { ProductDetails } from './src/components/ProductCard'
 import CartScreen from './src/CartScreen'
 import { CartProvider, cartContext } from './src/context/CartContext'
 
+
+const CartTabIcon = ({ color, size }: any) => {
+  const context = useContext(cartContext);
+
+  if (!context) {
+    return <MaterialCommunityIcons name="cart" size={size} color={color} />;
+  }
+
+  const { Carts } = context;
+
+  return (
+    <View style={{ position: 'relative' }}>
+      <MaterialCommunityIcons name="cart" size={size} color={color} />
+      <View
+        style={{
+          height: 14,
+          width: 14,
+          borderRadius: 7,
+          backgroundColor: color,
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          top: -10,
+          right: -5,
+        }}
+      >
+        <Text style={{ fontSize: 10, color: 'white', fontWeight: '500' }}>
+          {Carts?.length}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
 export type RootTabParamList = {
   Home_Stack: undefined,
   Cart: undefined,
@@ -46,7 +80,7 @@ const App = (): React.JSX.Element => {
           tabBarShowLabel: false,
           tabBarActiveTintColor: '#E96E6E'
         }}
-          // initialRouteName=''
+          // initialRouteName="Home_Stack"
         >
           <Tab.Screen name="Home_Stack" component={MyHomeStack} options={{
             tabBarIcon: ({ focused, color, size }) => {
@@ -58,46 +92,15 @@ const App = (): React.JSX.Element => {
               return <MaterialIcons name="reorder" size={size} color={color} />
             }
           }} />
+
           <Tab.Screen name="Cart" component={CartScreen} options={{
-            tabBarIcon: ({ focused, color, size }) => {
-              const context = useContext(cartContext)
-              if(!context){
-                return <MaterialCommunityIcons name="cart" size={size} color={color} />;
+              tabBarIcon: ({ focused, color, size }) => {
+                return  <CartTabIcon color={color} size={size} />
               }
-              const { Carts } = context;
-              return (
-                <View style={{
-                  position: 'relative'
-                }}>
-                  <MaterialCommunityIcons
-                    name="cart"
-                    size={size}
-                    color={color} />
-                <View
-                style={{
-                  height: 14,
-                  width: 14,
-                  borderRadius: 7,
-                  backgroundColor: color,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  position: 'absolute',
-                  top: -10,
-                  right: -5
-                }}
-                >
-                  <Text style={{
-                    fontSize: 10,
-                    color: "white",
-                    fontWeight: '500'
-                  }}>
-                  {Carts?.length}
-                  </Text>
-                </View>
-                </View>
-              )
-            }
-          }} />
+            }}
+          />
+
+
           <Tab.Screen name="Profile" component={HomeScreen} options={{
             tabBarIcon: ({ focused, color, size }) => {
               return <FontAwesome6 name="user" size={size} color={color} />

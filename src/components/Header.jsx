@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
 import React from 'react'
 import IonIcons from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
